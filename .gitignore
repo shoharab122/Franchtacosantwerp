@@ -37,3 +37,16 @@ dist/
 
 # macOS
 .DS_Store
+
+# Sensitive Data
+.env
+*.env
+data/
+*.sqlite
+
+# Dependencies & Builds
+node_modules/
+dist/
+
+# macOS
+.DS_Store
