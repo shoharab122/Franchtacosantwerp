@@ -32,7 +32,8 @@ async function clockRequest(req, res, url, ownerPort) {
   const body = await readRequest(req)
   if (body === null) return jsonError(res, 413, 'This request is too large.')
   try {
-    const upstream = await fetch(`http://127.0.0.1:${ownerPort}${url.pathname}`, {
+    const ownerUrl = process.env.OWNER_APP_URL || `http://127.0.0.1:${ownerPort}`;
+    const upstream = await fetch(`${ownerUrl}${url.pathname}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body,
