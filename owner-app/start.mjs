@@ -25,8 +25,8 @@ const buildDir = fileURLToPath(new URL('./dist', import.meta.url))
 const clockRoutes = new Set(['/api/clock/lookup', '/api/clock/punch'])
 
 async function readSettings() {
-  try { return parseEnv(await readFile('.env', 'utf8')) } catch (error) {
-    if (error.code === 'ENOENT') return {}
+  try { return { ...parseEnv(await readFile('.env', 'utf8')), ...process.env } } catch (error) {
+    if (error.code === 'ENOENT') return process.env
     throw error
   }
 }
