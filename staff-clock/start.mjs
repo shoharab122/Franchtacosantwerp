@@ -53,7 +53,7 @@ async function clockRequest(req, res, url, ownerPort) {
 try {
   await access('dist/index.html')
   const settings = await readSettings()
-  const port = localPort(settings.STAFF_CLOCK_PORT, 4174)
+  const port = process.env.PORT || localPort(settings.STAFF_CLOCK_PORT, 4174)
   const ownerPort = localPort(settings.OWNER_API_PORT, 4173)
   if (port === ownerPort) throw new Error('Choose different ports for the staff clock and the owner app.')
   const server = createServer(async (req, res) => {

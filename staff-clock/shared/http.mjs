@@ -19,7 +19,7 @@ export function localPort(value, fallback) {
 export function localRequestUrl(request, port) {
   const host = request.headers.host?.toLowerCase()
   const origins = [`http://127.0.0.1:${port}`, `http://localhost:${port}`].map(value => new URL(value))
-  const origin = origins.find(candidate => candidate.host === host)
+  let origin = origins.find(candidate => candidate.host === host); if (!origin && process.env.RENDER) origin = new URL('https://' + host);
   if (!origin || !request.url?.startsWith('/')) return null
   const url = new URL(request.url, origin)
   return url.origin === origin.origin ? url : null
@@ -73,7 +73,7 @@ export async function serveFrontend(request, response, buildDir, pathname) {
 export function listenLocal(server, port) {
   return new Promise((ready, fail) => {
     server.once('error', fail)
-    server.listen(port, '127.0.0.1', () => {
+    server.listen(port, '0.0.0.0', () => {
       server.off('error', fail)
       ready()
     })
