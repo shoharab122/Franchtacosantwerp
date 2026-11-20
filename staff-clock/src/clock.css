@@ -1,0 +1,99 @@
+.staff-clock { min-height: 100dvh; display: grid; grid-template-columns: minmax(330px, .88fr) minmax(370px, 1fr); }
+.clock-face {
+  overflow: hidden; isolation: isolate; position: relative; display: flex; justify-content: space-between; flex-direction: column;
+  padding: clamp(24px, 5vw, 68px); color: #eff9ef;
+  background: radial-gradient(ellipse at 51% 58%, #376343 0, transparent 67%), linear-gradient(145deg, #102b21, #1b4837);
+}
+.clock-face > .brand { z-index: 1; align-self: start; }
+.clock-wall { position: relative; z-index: 1; margin-block: auto; padding-bottom: 8px; }
+.clock-zone { display: flex; align-items: center; gap: 9px; font-size: clamp(.8125rem, 2vw, .9375rem); font-weight: 650; color: #d9ecd7; white-space: nowrap; }
+.clock-zone span { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px #d9f98c26; margin-left: 4px; }
+.wall-time { display: block; font: 800 clamp(4.1rem, 9.8vw, 10rem)/1 var(--heading); letter-spacing: -.075em; font-variant-numeric: tabular-nums; color: #f1fbe0; margin: 8px 0 9px -3px; white-space: nowrap; }
+.wall-date { color: #dbead8; font-size: clamp(1rem, 2.3vw, 1.55rem); font-weight: 580; }
+.clock-rings { display: grid; place-items: center; position: absolute; right: -9%; top: 50%; width: 10px; height: 10px; pointer-events: none; transform: translateY(-50%); z-index: -1; }
+.clock-rings i { position: absolute; width: var(--d); height: var(--d); border: 1px solid #bad9ab2d; border-radius: 50%; }
+.clock-rings i:nth-child(1) { --d: 245px; }
+.clock-rings i:nth-child(2) { --d: 365px; }
+.clock-rings i:nth-child(3) { --d: 485px; }
+.clock-rings i:nth-child(4) { --d: 605px; }
+.clock-rings b { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #c2e4a9; box-shadow: 0 0 0 5px #c2e4a925; }
+.clock-rings b:nth-of-type(1) { transform: translate(-122px, -5px); }
+.clock-rings b:nth-of-type(2) { width: 5px; height: 5px; transform: translate(-142px, 115px); }
+.clock-rings b:nth-of-type(3) { width: 6px; height: 6px; transform: translate(-223px, -193px); }
+.clock-content { display: grid; grid-template-rows: auto 1fr auto; gap: 15px; padding: 29px clamp(16px, 4vw, 52px) 24px; background: #f6f9f4; }
+.clock-top { display: flex; align-items: center; gap: 8px; justify-self: end; color: #3a624c; border: 1px solid #deebde; background: #edf5eb; padding: 8px 11px; border-radius: 30px; font-size: .8125rem; font-weight: 680; }
+.station-dot { width: 7px; height: 7px; border-radius: 50%; background: #6c986b; }
+.clock-stage { display: grid; place-items: center; }
+.clock-card {
+  display: grid; gap: 14px; width: min(100%, 445px); min-width: 0; background: #fff; border: 1px solid #e0e9df; border-radius: 19px;
+  padding: clamp(17px, 3vw, 30px); box-shadow: 0 14px 42px #19382b12;
+}
+.clock-card header { display: grid; justify-items: center; text-align: center; gap: 7px; }
+.clock-card-icon { justify-self: center; color: #3a6b4a; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px; background: #e7f2e5; }
+.clock-card h1 { font-family: var(--heading); font-size: clamp(1.72rem, 3vw, 2.18rem); line-height: 1.15; letter-spacing: -.05em; font-weight: 800; overflow-wrap: anywhere; }
+.clock-card p { color: var(--muted); font-size: .9375rem; line-height: 1.45; }
+.clock-card .error-message { color: var(--red); font-size: .8125rem; }
+.code-group { position: relative; width: 100%; margin: 1px 0 3px; }
+.code-input { position: absolute; inset: 0; width: 100%; opacity: 0; font-size: 16px; }
+.code-slots { display: grid; grid-template-columns: repeat(var(--code-length), minmax(0, 1fr)); gap: 6px; pointer-events: none; }
+.code-slots span { position: relative; display: grid; place-items: center; height: 43px; border-radius: 9px; background: #f6f8f5; border: 1px solid #dbe7da; }
+.code-group:focus-within .code-slots span:not(.code-filled) { border-color: #a0baa1; }
+.code-slots .code-filled { border-color: #94b497; background: #edf5ea; }
+.code-slots .code-filled::after { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #2c513a; }
+.keypad { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.key {
+  display: inline-grid; place-items: center; width: 100%; height: clamp(43px, 6.8vh, 58px);
+  padding: 0; color: #1e4733; background: #f7faf6; border: 1px solid #e2eae1; border-radius: 10px;
+  font: 790 1.38rem var(--heading); transition: background .14s;
+}
+.key:not(:disabled):hover { background: #e5f2e3; }
+.key:not(:disabled):active { background: #d9ebd7; }
+.key-utility { color: #466353; font: 680 .875rem Inter, sans-serif; }
+.clock-primary {
+  display: flex; align-items: center; justify-content: center; gap: 8px; color: #f7fff4; background: #1e4a36;
+  border: 1px solid #1e4a36; border-radius: 10px; min-height: 48px; padding: 8px 13px; font-size: .9375rem; font-weight: 750;
+}
+.clock-primary:not(:disabled):hover { background: #143927; }
+.clock-primary:disabled { background: #e5ece3; border-color: #dce7db; color: #536a5b; }
+.clock-footer { justify-self: center; display: flex; align-items: center; gap: 7px; color: #52685a; font-size: .8125rem; line-height: 1.4; text-align: center; }
+.clock-footer svg { color: #427859; }
+.review-card > h1, .review-card > p, .success-card > h1, .success-card > p { text-align: center; }
+.signature-field { display: grid; gap: 5px; }
+.signature-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.signature-header h2 { font-size: 1rem; }
+.signature-header button { min-height: 34px; padding: 4px 10px; color: #315b42; background: #f5f8f4; border: 1px solid #dce7db; border-radius: 8px; font-size: .8125rem; font-weight: 700; }
+.signature-header button:disabled { opacity: .58; }
+.signature-field p { font-size: .8125rem; }
+.signature-pad { display: block; width: 100%; height: 120px; border-radius: 9px; outline: 1px solid #a9c0ab; outline-offset: -1px; background: #f8fbf7; touch-action: none; user-select: none; cursor: crosshair; }
+.signature-guide { stroke: #b7cbb8; stroke-width: 1; stroke-dasharray: 4 3; }
+.signature-ink { fill: none; stroke: #1e4a36; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.staff-shifts { padding: 12px 12px 0; border: 1px solid #e4ebe1; border-radius: 10px; background: #fbfdfb; }
+.staff-shifts h2 { display: flex; gap: 7px; align-items: center; font-size: 1.05rem; margin-bottom: 7px; letter-spacing: -.025em; }
+.staff-shifts h2 svg { color: #467154; }
+.staff-shifts ul { list-style: none; margin: 0; padding: 0; max-height: min(270px, 35vh); overflow-y: auto; }
+.staff-shifts li { border-top: 1px solid #e6eee3; padding: 8px 0; display: grid; gap: 3px; }
+.staff-shifts li strong { font-size: .875rem; }
+.staff-shifts li span, .staff-shifts li small { font-size: .8125rem; color: var(--muted); overflow-wrap: anywhere; }
+.staff-shifts p { font-size: .875rem; margin-bottom: 12px; }
+.clock-back { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: transparent; border: 1px solid #e0e9df; border-radius: 9px; color: #315b42; min-height: 42px; font-size: .875rem; font-weight: 700; }
+.clock-back:hover { background: #eff6ed; }
+.clock-success { width: 61px; height: 61px; border-radius: 50%; background: #e4f3df; }
+.success-card { min-height: 250px; align-content: center; }
+.success-card .worked { display: flex; justify-content: space-between; padding: 11px; background: #eef6ec; border-radius: 8px; }
+@media (max-width: 760px) {
+  .staff-clock { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .clock-face { min-height: 167px; padding: 13px 16px; gap: 14px; }
+  .clock-face .brand img { width: 30px; height: 30px; border-radius: 8px; }
+  .clock-face .brand { font-size: 1rem; }
+  .wall-time { font-size: clamp(2.9rem, 10vw, 5rem); margin: 3px 0 3px -1px; }
+  .wall-date { font-size: 1rem; }
+  .clock-rings { right: 15%; }
+  .clock-content { padding: 12px; gap: 12px; }
+  .clock-top { display: none; }
+  .clock-card { gap: 11px; padding: 15px; }
+  .clock-card-icon { width: 37px; height: 37px; border-radius: 10px; }
+  .clock-card-icon svg { width: 20px; height: 20px; }
+  .clock-success { width: 53px; height: 53px; border-radius: 50%; }
+  .clock-success svg { width: 28px; height: 28px; }
+  .code-slots span { height: 38px; }
+}

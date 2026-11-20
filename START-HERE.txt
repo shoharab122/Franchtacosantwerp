@@ -1,0 +1,72 @@
+French Tacos Antwerp for your laptop
+===================================
+
+You need Node.js 24 or newer. Install it from https://nodejs.org/ if it is
+missing. Both apps are already built. The launchers work without npm install.
+
+Start on Windows
+----------------
+
+1. Extract the entire ZIP into a folder.
+2. Open owner-app and double-click Start Owner App.cmd.
+   On the first run, choose an owner password of at least 14 characters and
+   enter it again to confirm. The password stays hidden while typing.
+3. Open http://localhost:4173/ in your browser and sign in.
+   Go to Staff, add an employee and choose their four-digit clock PIN.
+4. Open staff-clock and double-click Start Staff Clock.cmd.
+   Open http://127.0.0.1:4174/ in a browser to access the staff clock.
+5. Keep both command windows open while using the clock. On a shared laptop,
+   sign out of the owner dashboard before handing the laptop to staff.
+
+On macOS or Linux, open two terminals. Run node start.mjs inside owner-app in
+one terminal and inside staff-clock in the other. The browser URLs are the same.
+
+Updating an existing installation
+---------------------------------
+
+1. Close both app windows and back up the old installation folder.
+2. Extract this ZIP to a new folder. Copy your old owner-app/.env and
+   owner-app/data folder into the new owner-app folder before launching it.
+   If you set a custom database location, keep that location and its backup.
+   Copy staff-clock/.env too if you changed the clock ports.
+3. Start the new apps. In Staff, select Edit for anyone marked "Needs a
+   4-digit PIN" and assign a new PIN. An employee who is already clocked in
+   can finish that open entry with the new PIN.
+
+Owner app
+---------
+
+The owner app contains the password-protected dashboard, the backend and the
+SQLite database. Use it to add or edit staff, plan and share shifts, correct
+clock entries, approve hours and review totals in Brussels local time. Go to
+Attendance > Hours by staff and choose Week, Month or Year for recorded and
+approved hours. Open a clock entry to view its signatures.
+
+The workspace starts empty. Staff records stay on this laptop in
+owner-app/data/minhaj-shift.sqlite. Keep owner-app/.env with your database
+backup because it contains the encryption key used to read staff records and
+verify clock PINs. Stop the owner app before copying its data folder.
+
+Schedule > Send shifts shares shifts in the staff clock. For optional SMS,
+add the three Twilio variables from owner-app/.env.example to the generated
+owner-app/.env and restart the owner app.
+
+Staff clock
+-----------
+
+The staff clock runs in its own process. Staff enter their four-digit PIN,
+draw a signature and select Sign and clock in or Sign and clock out. The
+clock also displays the employee's shared shifts. It connects to the owner
+app on this laptop to save punches.
+
+Editing the source
+------------------
+
+Each app has its own React source and package files. In the app you want to
+modify, run npm ci once, then npm run build after making changes. For backend
+checks, run npm test from owner-app.
+
+If you need different ports, use the settings in the two .env.example files.
+Keep STAFF_CLOCK_PORT the same in both apps, and set OWNER_API_PORT in the
+staff clock to match OWNER_PORT in the owner app. Restart the apps after
+editing the settings and use the browser addresses printed on startup.
