@@ -1,0 +1,16 @@
+node_modules/
+.env
+data/
+
+# Sensitive Data
+.env
+*.env
+owner-app/data/
+*.sqlite
+
+# Dependencies & Builds
+node_modules/
+dist/
+
+# macOS
+.DS_Store
