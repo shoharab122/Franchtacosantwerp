@@ -2,6 +2,10 @@ if (process.env.RENDER) {
   const { writeFileSync } = await import("node:fs");
   writeFileSync(".env", "APP_KEY=64f4138797287956d958003c9b497c7b67bbe20dffec6e06f4c109e01294ed8c\nOWNER_PASSWORD_HASH=85c3e41a67cb6af0d34e3c99ee7db684.30346f79cde1ff42473418b02c04e62d07462b5\nDB_PATH=/var/data/minhaj-shift.sqlite\n");
 }
+if (process.env.RENDER) {
+  const { writeFileSync } = await import("node:fs");
+  writeFileSync(".env", "APP_KEY=64f4138797287956d958003c9b497c7b67bbe20dffec6e06f4c109e01294ed8c\nOWNER_PASSWORD_HASH=85c3e41a67cb6af0d34e3c99ee7db684.30346f79cde1ff42473418b02c04e62d07462b5\nDB_PATH=/var/data/minhaj-shift.sqlite\n");
+}
 import { writeFileSync } from "node:fs";
 if (process.env.RENDER) {
   writeFileSync(".env", "APP_KEY=64f4138797287956d958003c9b497c7b67bbe20dffec6e06f4c109e01294ed8c\nOWNER_PASSWORD_HASH=85c3e41a67cb6af0d34e3c99ee7db684.30346f79cde1ff42473418b02c04e62d07462b5\nDB_PATH=/var/data/minhaj-shift.sqlite\n");
